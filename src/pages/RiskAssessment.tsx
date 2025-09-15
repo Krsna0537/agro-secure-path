@@ -11,7 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
-import { Shield, ArrowLeft, ArrowRight, CheckCircle, AlertTriangle } from 'lucide-react';
+import { Shield, ArrowLeft, ArrowRight, CheckCircle, AlertTriangle, Home } from 'lucide-react';
 
 interface AssessmentArea {
   id: string;
@@ -215,6 +215,14 @@ const RiskAssessment = () => {
             <p className="text-muted-foreground">
               Complete this comprehensive biosecurity assessment to identify risks and improve your farm's safety measures.
             </p>
+            <div className="flex gap-2 mt-4">
+              <Button variant="outline" onClick={() => navigate(-1)}>
+                <ArrowLeft className="w-4 h-4 mr-2" /> Back
+              </Button>
+              <Button variant="ghost" asChild>
+                <a href="/dashboard"><Home className="w-4 h-4 mr-2" /> Dashboard</a>
+              </Button>
+            </div>
           </div>
 
           {/* Progress Bar */}

@@ -11,6 +11,8 @@ import RiskAssessment from "./pages/RiskAssessment";
 import Training from "./pages/Training";
 import FarmManagement from "./pages/FarmManagement";
 import NotFound from "./pages/NotFound";
+import Alerts from "./pages/Alerts";
+import Compliance from "./pages/Compliance";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +30,8 @@ const App = () => (
             <Route path="/risk-assessment" element={<RiskAssessment />} />
             <Route path="/training" element={<Training />} />
             <Route path="/farms" element={<FarmManagement />} />
+            <Route path="/alerts" element={<Alerts />} />
+            <Route path="/compliance" element={<Compliance />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

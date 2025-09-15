@@ -10,7 +10,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
-import { BookOpen, Clock, Target, Play, CheckCircle, Award } from 'lucide-react';
+import { BookOpen, Clock, Target, Play, CheckCircle, Award, ArrowLeft, Home } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 interface TrainingModule {
   id: string;
@@ -34,6 +35,7 @@ interface UserProgress {
 
 const Training = () => {
   const { user, loading } = useAuth();
+  const navigate = useNavigate();
   const { toast } = useToast();
   
   const [modules, setModules] = useState<TrainingModule[]>([]);
@@ -288,6 +290,14 @@ const Training = () => {
           <p className="text-muted-foreground">
             Enhance your biosecurity knowledge with our comprehensive training modules.
           </p>
+          <div className="flex gap-2 mt-4">
+            <Button variant="outline" onClick={() => navigate(-1)}>
+              <ArrowLeft className="w-4 h-4 mr-2" /> Back
+            </Button>
+            <Button variant="ghost" asChild>
+              <a href="/dashboard"><Home className="w-4 h-4 mr-2" /> Dashboard</a>
+            </Button>
+          </div>
         </div>
 
         {/* Progress Overview */}

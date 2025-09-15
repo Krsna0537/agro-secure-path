@@ -24,16 +24,16 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold text-foreground mb-4">Platform</h4>
             <div className="space-y-2">
-              <a href="#" className="block text-muted-foreground hover:text-foreground transition-colors">
+              <a href="/risk-assessment" className="block text-muted-foreground hover:text-foreground transition-colors">
                 Risk Assessment
               </a>
-              <a href="#" className="block text-muted-foreground hover:text-foreground transition-colors">
+              <a href="/training" className="block text-muted-foreground hover:text-foreground transition-colors">
                 Training Modules
               </a>
-              <a href="#" className="block text-muted-foreground hover:text-foreground transition-colors">
+              <a href="/compliance" className="block text-muted-foreground hover:text-foreground transition-colors">
                 Compliance Tracking
               </a>
-              <a href="#" className="block text-muted-foreground hover:text-foreground transition-colors">
+              <a href="/alerts" className="block text-muted-foreground hover:text-foreground transition-colors">
                 Alert System
               </a>
             </div>
@@ -43,16 +43,16 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold text-foreground mb-4">Support</h4>
             <div className="space-y-2">
-              <a href="#" className="block text-muted-foreground hover:text-foreground transition-colors">
+              <a href="/#features" className="block text-muted-foreground hover:text-foreground transition-colors">
                 Help Center
               </a>
-              <a href="#" className="block text-muted-foreground hover:text-foreground transition-colors">
+              <a href="/#features" className="block text-muted-foreground hover:text-foreground transition-colors">
                 Documentation
               </a>
-              <a href="#" className="block text-muted-foreground hover:text-foreground transition-colors">
+              <a href="/#contact" className="block text-muted-foreground hover:text-foreground transition-colors">
                 Contact Us
               </a>
-              <a href="#" className="block text-muted-foreground hover:text-foreground transition-colors">
+              <a href="/#features" className="block text-muted-foreground hover:text-foreground transition-colors">
                 Community Forum
               </a>
             </div>

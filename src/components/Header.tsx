@@ -1,9 +1,11 @@
 import { Button } from "@/components/ui/button";
-import { Shield, Menu } from "lucide-react";
+import { Shield, Menu, LogOut } from "lucide-react";
 import { useState } from "react";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user, signOut } = useAuth();
 
   return (
     <header className="bg-card border-b border-border sticky top-0 z-50">
@@ -16,23 +18,60 @@ const Header = () => {
           
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-6">
-            <a href="#features" className="text-muted-foreground hover:text-foreground transition-colors">
-              Features
-            </a>
-            <a href="#training" className="text-muted-foreground hover:text-foreground transition-colors">
-              Training
-            </a>
-            <a href="#compliance" className="text-muted-foreground hover:text-foreground transition-colors">
-              Compliance
-            </a>
-            <a href="#contact" className="text-muted-foreground hover:text-foreground transition-colors">
-              Contact
-            </a>
+            {!user ? (
+              <>
+                <a href="/#features" className="text-muted-foreground hover:text-foreground transition-colors">
+                  Features
+                </a>
+                <a href="/#training" className="text-muted-foreground hover:text-foreground transition-colors">
+                  Training
+                </a>
+                <a href="/#compliance" className="text-muted-foreground hover:text-foreground transition-colors">
+                  Compliance
+                </a>
+                <a href="/#contact" className="text-muted-foreground hover:text-foreground transition-colors">
+                  Contact
+                </a>
+              </>
+            ) : (
+              <>
+                <a href="/dashboard" className="text-muted-foreground hover:text-foreground transition-colors">
+                  Dashboard
+                </a>
+                <a href="/farms" className="text-muted-foreground hover:text-foreground transition-colors">
+                  Farms
+                </a>
+                <a href="/risk-assessment" className="text-muted-foreground hover:text-foreground transition-colors">
+                  Assessment
+                </a>
+                <a href="/training" className="text-muted-foreground hover:text-foreground transition-colors">
+                  Training
+                </a>
+                <a href="/alerts" className="text-muted-foreground hover:text-foreground transition-colors">
+                  Alerts
+                </a>
+                <a href="/compliance" className="text-muted-foreground hover:text-foreground transition-colors">
+                  Compliance
+                </a>
+              </>
+            )}
           </nav>
 
           <div className="hidden md:flex items-center space-x-3">
-            <Button variant="ghost">Login</Button>
-            <Button>Get Started</Button>
+            {!user ? (
+              <>
+                <Button variant="ghost" asChild>
+                  <a href="/auth">Login</a>
+                </Button>
+                <Button asChild>
+                  <a href="/auth">Get Started</a>
+                </Button>
+              </>
+            ) : (
+              <Button variant="outline" onClick={signOut}>
+                <LogOut className="h-4 w-4 mr-2" /> Sign out
+              </Button>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -50,22 +89,56 @@ const Header = () => {
         {isMenuOpen && (
           <nav className="md:hidden mt-4 pb-4 border-t border-border pt-4">
             <div className="flex flex-col space-y-3">
-              <a href="#features" className="text-muted-foreground hover:text-foreground transition-colors">
-                Features
-              </a>
-              <a href="#training" className="text-muted-foreground hover:text-foreground transition-colors">
-                Training
-              </a>
-              <a href="#compliance" className="text-muted-foreground hover:text-foreground transition-colors">
-                Compliance
-              </a>
-              <a href="#contact" className="text-muted-foreground hover:text-foreground transition-colors">
-                Contact
-              </a>
-              <div className="flex flex-col space-y-2 pt-2">
-                <Button variant="ghost" className="justify-start">Login</Button>
-                <Button className="justify-start">Get Started</Button>
-              </div>
+              {!user ? (
+                <>
+                  <a href="/#features" className="text-muted-foreground hover:text-foreground transition-colors">
+                    Features
+                  </a>
+                  <a href="/#training" className="text-muted-foreground hover:text-foreground transition-colors">
+                    Training
+                  </a>
+                  <a href="/#compliance" className="text-muted-foreground hover:text-foreground transition-colors">
+                    Compliance
+                  </a>
+                  <a href="/#contact" className="text-muted-foreground hover:text-foreground transition-colors">
+                    Contact
+                  </a>
+                  <div className="flex flex-col space-y-2 pt-2">
+                    <Button variant="ghost" className="justify-start" asChild>
+                      <a href="/auth">Login</a>
+                    </Button>
+                    <Button className="justify-start" asChild>
+                      <a href="/auth">Get Started</a>
+                    </Button>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <a href="/dashboard" className="text-muted-foreground hover:text-foreground transition-colors">
+                    Dashboard
+                  </a>
+                  <a href="/farms" className="text-muted-foreground hover:text-foreground transition-colors">
+                    Farms
+                  </a>
+                  <a href="/risk-assessment" className="text-muted-foreground hover:text-foreground transition-colors">
+                    Assessment
+                  </a>
+                  <a href="/training" className="text-muted-foreground hover:text-foreground transition-colors">
+                    Training
+                  </a>
+                  <a href="/alerts" className="text-muted-foreground hover:text-foreground transition-colors">
+                    Alerts
+                  </a>
+                  <a href="/compliance" className="text-muted-foreground hover:text-foreground transition-colors">
+                    Compliance
+                  </a>
+                  <div className="flex flex-col space-y-2 pt-2">
+                    <Button variant="outline" className="justify-start" onClick={signOut}>
+                      <LogOut className="h-4 w-4 mr-2" /> Sign out
+                    </Button>
+                  </div>
+                </>
+              )}
             </div>
           </nav>
         )}

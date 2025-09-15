@@ -218,8 +218,8 @@ const Dashboard = () => {
                   <div className="text-center py-6">
                     <MapPin className="w-12 h-12 mx-auto text-muted-foreground mb-3" />
                     <p className="text-muted-foreground">No assessments yet</p>
-                    <Button variant="outline" size="sm" className="mt-2">
-                      Start Assessment
+                    <Button asChild variant="outline" size="sm" className="mt-2">
+                      <a href="/risk-assessment">Start Assessment</a>
                     </Button>
                   </div>
                 )}
@@ -228,7 +228,7 @@ const Dashboard = () => {
           </Card>
 
           {/* Recent Alerts */}
-          <Card>
+          <Card id="alerts">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <AlertTriangle className="w-5 h-5" />

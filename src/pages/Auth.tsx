@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -21,6 +21,7 @@ const Auth = () => {
 
   const { user, signIn, signUp } = useAuth();
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   // Redirect if already authenticated
   if (user) {
@@ -120,6 +121,14 @@ const Auth = () => {
                   <Button type="submit" className="w-full" disabled={isLoading}>
                     {isLoading ? 'Signing In...' : 'Sign In'}
                   </Button>
+                  <div className="flex gap-2 pt-2">
+                    <Button variant="outline" type="button" onClick={() => navigate(-1)} className="flex-1">
+                      Back
+                    </Button>
+                    <Button variant="ghost" type="button" asChild className="flex-1">
+                      <a href="/">Home</a>
+                    </Button>
+                  </div>
                 </form>
               </CardContent>
             </Card>
@@ -172,6 +181,14 @@ const Auth = () => {
                   <Button type="submit" className="w-full" disabled={isLoading}>
                     {isLoading ? 'Creating Account...' : 'Create Account'}
                   </Button>
+                  <div className="flex gap-2 pt-2">
+                    <Button variant="outline" type="button" onClick={() => navigate(-1)} className="flex-1">
+                      Back
+                    </Button>
+                    <Button variant="ghost" type="button" asChild className="flex-1">
+                      <a href="/">Home</a>
+                    </Button>
+                  </div>
                 </form>
               </CardContent>
             </Card>

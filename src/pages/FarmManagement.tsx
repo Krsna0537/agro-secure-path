@@ -12,7 +12,8 @@ import { Badge } from '@/components/ui/badge';
 import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
-import { Building, Plus, MapPin, Users, Calendar, Edit, Trash2 } from 'lucide-react';
+import { Building, Plus, MapPin, Users, Calendar, Edit, Trash2, ArrowLeft, Home } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 interface Farm {
   id: string;
@@ -27,6 +28,7 @@ interface Farm {
 
 const FarmManagement = () => {
   const { user, loading } = useAuth();
+  const navigate = useNavigate();
   const { toast } = useToast();
   
   const [farms, setFarms] = useState<Farm[]>([]);
@@ -203,6 +205,14 @@ const FarmManagement = () => {
             <div className="flex items-center gap-2">
               <Building className="w-6 h-6 text-primary" />
               <h1 className="text-3xl font-bold">Farm Management</h1>
+            </div>
+            <div className="flex gap-2">
+              <Button variant="outline" onClick={() => navigate(-1)}>
+                <ArrowLeft className="w-4 h-4 mr-2" /> Back
+              </Button>
+              <Button variant="ghost" asChild>
+                <a href="/dashboard"><Home className="w-4 h-4 mr-2" /> Dashboard</a>
+              </Button>
             </div>
             <Dialog open={showAddDialog} onOpenChange={setShowAddDialog}>
               <DialogTrigger asChild>

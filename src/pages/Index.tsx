@@ -52,11 +52,11 @@ const Index = () => {
             measures in pig and poultry farming operations
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" variant="secondary" className="text-lg px-8 py-4">
-              Start Risk Assessment
+            <Button size="lg" variant="secondary" className="text-lg px-8 py-4" asChild>
+              <a href="/risk-assessment">Start Risk Assessment</a>
             </Button>
-            <Button size="lg" variant="outline" className="text-lg px-8 py-4 bg-white/10 border-white text-white hover:bg-white hover:text-primary">
-              Watch Demo
+            <Button size="lg" variant="outline" className="text-lg px-8 py-4 bg-white/10 border-white text-white hover:bg-white hover:text-primary" asChild>
+              <a href="/#contact">Watch Demo</a>
             </Button>
           </div>
         </div>
@@ -127,6 +127,58 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Compliance Section */}
+      <section id="compliance" className="py-20 bg-muted/30">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">Compliance & Recognition</h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Track compliance with national and international standards and work towards disease-free compartment recognition.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <Card>
+              <CardContent className="p-6">
+                <h4 className="font-semibold mb-2 text-foreground">Regulatory Tracking</h4>
+                <p className="text-muted-foreground">Monitor adherence to biosecurity regulations and generate reports.</p>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardContent className="p-6">
+                <h4 className="font-semibold mb-2 text-foreground">Audit Readiness</h4>
+                <p className="text-muted-foreground">Maintain records required for inspections and certification.</p>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardContent className="p-6">
+                <h4 className="font-semibold mb-2 text-foreground">Compartment Goals</h4>
+                <p className="text-muted-foreground">Track progress towards disease-free compartment recognition.</p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="py-20">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">Contact Us</h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Questions or feedback? We’d love to hear from you.
+            </p>
+          </div>
+          <div className="max-w-2xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <Button asChild className="w-full">
+              <a href="/auth">Sign In to Get Started</a>
+            </Button>
+            <Button variant="outline" asChild className="w-full">
+              <a href="#features">Explore Features</a>
+            </Button>
+          </div>
+        </div>
+      </section>
+
       {/* Training Section */}
       <section id="training" className="py-20 bg-muted/30">
         <div className="container mx-auto px-4">
@@ -160,8 +212,8 @@ const Index = () => {
                 </div>
               </div>
               
-              <Button size="lg">
-                Explore Training Modules
+              <Button size="lg" asChild>
+                <a href="/training">Explore Training Modules</a>
               </Button>
             </div>
             
@@ -210,11 +262,11 @@ const Index = () => {
             to protect their livestock and improve their operations.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" variant="secondary" className="text-lg px-8 py-4">
-              Start Free Assessment
+            <Button size="lg" variant="secondary" className="text-lg px-8 py-4" asChild>
+              <a href="/risk-assessment">Start Free Assessment</a>
             </Button>
-            <Button size="lg" variant="outline" className="text-lg px-8 py-4 bg-white/10 border-white text-white hover:bg-white hover:text-primary">
-              Contact Sales
+            <Button size="lg" variant="outline" className="text-lg px-8 py-4 bg-white/10 border-white text-white hover:bg-white hover:text-primary" asChild>
+              <a href="/#contact">Contact Sales</a>
             </Button>
           </div>
         </div>

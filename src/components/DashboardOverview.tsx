@@ -21,7 +21,9 @@ const DashboardOverview = () => {
         <p className="text-muted-foreground mb-4">
           Your comprehensive biosecurity management dashboard for pig and poultry farms
         </p>
-        <Button>Complete Farm Assessment</Button>
+        <Button asChild>
+          <a href="/risk-assessment">Complete Farm Assessment</a>
+        </Button>
       </div>
 
       {/* Stats Grid */}
@@ -81,14 +83,14 @@ const DashboardOverview = () => {
                 <span className="text-sm font-medium text-success">Low Risk</span>
               </div>
             </div>
-            <Button variant="outline" className="w-full">
-              View Full Assessment
+            <Button variant="outline" className="w-full" asChild>
+              <a href="/risk-assessment">View Full Assessment</a>
             </Button>
           </CardContent>
         </Card>
 
         {/* Recent Alerts */}
-        <Card>
+        <Card id="alerts">
           <CardHeader>
             <CardTitle className="flex items-center space-x-2">
               <Bell className="h-5 w-5 text-primary" />
@@ -106,8 +108,8 @@ const DashboardOverview = () => {
                 <p className="text-xs text-muted-foreground">Disinfection system</p>
               </div>
             </div>
-            <Button variant="outline" className="w-full">
-              View All Alerts
+            <Button variant="outline" className="w-full" asChild>
+              <a href="/alerts">View All Alerts</a>
             </Button>
           </CardContent>
         </Card>
@@ -141,8 +143,8 @@ const DashboardOverview = () => {
                 </div>
               </div>
             </div>
-            <Button variant="outline" className="w-full">
-              Continue Training
+            <Button variant="outline" className="w-full" asChild>
+              <a href="/training">Continue Training</a>
             </Button>
           </CardContent>
         </Card>
