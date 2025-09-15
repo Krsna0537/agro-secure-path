@@ -14,7 +14,338 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      alerts: {
+        Row: {
+          alert_type: string
+          created_at: string
+          farm_type: string | null
+          id: string
+          is_active: boolean | null
+          location: string | null
+          message: string
+          severity: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          alert_type: string
+          created_at?: string
+          farm_type?: string | null
+          id?: string
+          is_active?: boolean | null
+          location?: string | null
+          message: string
+          severity: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          alert_type?: string
+          created_at?: string
+          farm_type?: string | null
+          id?: string
+          is_active?: boolean | null
+          location?: string | null
+          message?: string
+          severity?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      biosecurity_scores: {
+        Row: {
+          calculated_at: string
+          category_scores: Json
+          farm_id: string
+          id: string
+          overall_score: number | null
+        }
+        Insert: {
+          calculated_at?: string
+          category_scores?: Json
+          farm_id: string
+          id?: string
+          overall_score?: number | null
+        }
+        Update: {
+          calculated_at?: string
+          category_scores?: Json
+          farm_id?: string
+          id?: string
+          overall_score?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "biosecurity_scores_farm_id_fkey"
+            columns: ["farm_id"]
+            isOneToOne: false
+            referencedRelation: "farms"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      compliance_records: {
+        Row: {
+          certificate_number: string | null
+          compliance_type: string
+          created_at: string
+          expiry_date: string | null
+          farm_id: string
+          id: string
+          issue_date: string | null
+          notes: string | null
+          status: string | null
+          updated_at: string
+        }
+        Insert: {
+          certificate_number?: string | null
+          compliance_type: string
+          created_at?: string
+          expiry_date?: string | null
+          farm_id: string
+          id?: string
+          issue_date?: string | null
+          notes?: string | null
+          status?: string | null
+          updated_at?: string
+        }
+        Update: {
+          certificate_number?: string | null
+          compliance_type?: string
+          created_at?: string
+          expiry_date?: string | null
+          farm_id?: string
+          id?: string
+          issue_date?: string | null
+          notes?: string | null
+          status?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "compliance_records_farm_id_fkey"
+            columns: ["farm_id"]
+            isOneToOne: false
+            referencedRelation: "farms"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      farms: {
+        Row: {
+          animal_count: number | null
+          created_at: string
+          farm_type: string
+          id: string
+          location: string
+          name: string
+          owner_id: string
+          registration_number: string | null
+          size_hectares: number | null
+          updated_at: string
+        }
+        Insert: {
+          animal_count?: number | null
+          created_at?: string
+          farm_type: string
+          id?: string
+          location: string
+          name: string
+          owner_id: string
+          registration_number?: string | null
+          size_hectares?: number | null
+          updated_at?: string
+        }
+        Update: {
+          animal_count?: number | null
+          created_at?: string
+          farm_type?: string
+          id?: string
+          location?: string
+          name?: string
+          owner_id?: string
+          registration_number?: string | null
+          size_hectares?: number | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "farms_owner_id_fkey"
+            columns: ["owner_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          farm_type: string | null
+          full_name: string | null
+          id: string
+          location: string | null
+          phone: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          farm_type?: string | null
+          full_name?: string | null
+          id?: string
+          location?: string | null
+          phone?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          farm_type?: string | null
+          full_name?: string | null
+          id?: string
+          location?: string | null
+          phone?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      risk_assessments: {
+        Row: {
+          areas: Json
+          assessment_date: string
+          created_at: string
+          farm_id: string
+          id: string
+          overall_score: number | null
+          recommendations: string | null
+          status: string | null
+          updated_at: string
+        }
+        Insert: {
+          areas?: Json
+          assessment_date?: string
+          created_at?: string
+          farm_id: string
+          id?: string
+          overall_score?: number | null
+          recommendations?: string | null
+          status?: string | null
+          updated_at?: string
+        }
+        Update: {
+          areas?: Json
+          assessment_date?: string
+          created_at?: string
+          farm_id?: string
+          id?: string
+          overall_score?: number | null
+          recommendations?: string | null
+          status?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "risk_assessments_farm_id_fkey"
+            columns: ["farm_id"]
+            isOneToOne: false
+            referencedRelation: "farms"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      training_modules: {
+        Row: {
+          content: string | null
+          created_at: string
+          description: string | null
+          difficulty_level: string | null
+          duration_minutes: number | null
+          farm_type: string | null
+          id: string
+          is_active: boolean | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          content?: string | null
+          created_at?: string
+          description?: string | null
+          difficulty_level?: string | null
+          duration_minutes?: number | null
+          farm_type?: string | null
+          id?: string
+          is_active?: boolean | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          content?: string | null
+          created_at?: string
+          description?: string | null
+          difficulty_level?: string | null
+          duration_minutes?: number | null
+          farm_type?: string | null
+          id?: string
+          is_active?: boolean | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      user_training_progress: {
+        Row: {
+          completed_at: string | null
+          created_at: string
+          id: string
+          module_id: string
+          progress_percentage: number | null
+          started_at: string | null
+          status: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          completed_at?: string | null
+          created_at?: string
+          id?: string
+          module_id: string
+          progress_percentage?: number | null
+          started_at?: string | null
+          status?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          completed_at?: string | null
+          created_at?: string
+          id?: string
+          module_id?: string
+          progress_percentage?: number | null
+          started_at?: string | null
+          status?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_training_progress_module_id_fkey"
+            columns: ["module_id"]
+            isOneToOne: false
+            referencedRelation: "training_modules"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "user_training_progress_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
