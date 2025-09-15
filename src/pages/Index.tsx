@@ -19,6 +19,13 @@ import {
 import heroImage from "@/assets/farm-hero.jpg";
 
 const Index = () => {
+  const { user } = useAuth();
+  
+  // If user is logged in, show dashboard overview instead
+  if (user) {
+    return <DashboardOverview />;
+  }
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
