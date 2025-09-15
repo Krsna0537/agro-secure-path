@@ -3,6 +3,10 @@ import { Navigate } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import StatsCard from '@/components/StatsCard';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Progress } from '@/components/ui/progress';
 import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/integrations/supabase/client';
 import { Shield, AlertTriangle, CheckCircle, BookOpen, Activity, MapPin } from 'lucide-react';
@@ -152,7 +156,7 @@ const Dashboard = () => {
             value={`${dashboardData?.biosecurityScore}%`}
             description="Overall farm biosecurity rating"
             icon={Shield}
-            variant="primary"
+            variant="default"
           />
           <StatsCard
             title="Active Alerts"
@@ -173,7 +177,7 @@ const Dashboard = () => {
             value={`${trainingPercentage}%`}
             description={`${completedTraining}/${totalTraining} modules completed`}
             icon={BookOpen}
-            variant="secondary"
+            variant="default"
           />
         </div>
 
