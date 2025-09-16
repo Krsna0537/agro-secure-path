@@ -6,7 +6,7 @@ import { useAuth } from "@/contexts/AuthContext";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { user, signOut } = useAuth();
+  const { user, role, signOut } = useAuth();
 
   return (
     <header className="bg-card border-b border-border sticky top-0 z-50">
@@ -51,9 +51,11 @@ const Header = () => {
                 <a href="/alerts" className="text-muted-foreground hover:text-foreground transition-colors">
                   Alerts
                 </a>
-                <a href="/compliance" className="text-muted-foreground hover:text-foreground transition-colors">
-                  Compliance
-                </a>
+                {role === 'admin' && (
+                  <a href="/admin" className="text-muted-foreground hover:text-foreground transition-colors">
+                    Admin
+                  </a>
+                )}
               </>
             )}
           </nav>
@@ -128,9 +130,11 @@ const Header = () => {
                   <a href="/alerts" className="text-muted-foreground hover:text-foreground transition-colors">
                     Alerts
                   </a>
-                  <a href="/compliance" className="text-muted-foreground hover:text-foreground transition-colors">
-                    Compliance
-                  </a>
+                  {role === 'admin' && (
+                    <a href="/admin" className="text-muted-foreground hover:text-foreground transition-colors">
+                      Admin Panel
+                    </a>
+                  )}
                   <div className="flex flex-col space-y-2 pt-2">
                     <Button variant="outline" className="justify-start" onClick={signOut}>
                       <LogOut className="h-4 w-4 mr-2" /> Sign out

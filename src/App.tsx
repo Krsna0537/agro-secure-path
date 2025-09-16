@@ -13,6 +13,8 @@ import FarmManagement from "./pages/FarmManagement";
 import NotFound from "./pages/NotFound";
 import Alerts from "./pages/Alerts";
 import Compliance from "./pages/Compliance";
+import AdminDashboard from "./pages/AdminDashboard";
+import AdminUsers from "./pages/AdminUsers";
 import RequireRole from "./components/RequireRole";
 
 const queryClient = new QueryClient();
@@ -37,6 +39,22 @@ const App = () => (
               element={
                 <RequireRole role="admin">
                   <Compliance />
+                </RequireRole>
+              }
+            />
+            <Route
+              path="/admin"
+              element={
+                <RequireRole role="admin">
+                  <AdminDashboard />
+                </RequireRole>
+              }
+            />
+            <Route
+              path="/admin/users"
+              element={
+                <RequireRole role="admin">
+                  <AdminUsers />
                 </RequireRole>
               }
             />

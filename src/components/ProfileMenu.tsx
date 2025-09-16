@@ -35,6 +35,17 @@ const ProfileMenu = () => {
         <DropdownMenuItem asChild>
           <a href="/alerts">Alerts</a>
         </DropdownMenuItem>
+        {role === 'admin' && (
+          <>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem asChild>
+              <a href="/admin">Admin Panel</a>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <a href="/admin/users">Manage Users</a>
+            </DropdownMenuItem>
+          </>
+        )}
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={signOut}>Sign out</DropdownMenuItem>
       </DropdownMenuContent>
