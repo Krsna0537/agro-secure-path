@@ -10,6 +10,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/integrations/supabase/client';
 import { Bell, AlertTriangle, CheckCircle, Filter, RefreshCw, ArrowLeft, Home } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import Breadcrumbs from '@/components/Breadcrumbs';
 
 interface AlertItem {
   id: string;
@@ -56,6 +57,7 @@ const Alerts = () => {
       <Header />
       <main className="container mx-auto px-4 py-8">
         <div className="mb-8">
+          <Breadcrumbs items={[{ label: 'Dashboard', href: '/dashboard' }, { label: 'Alerts' }]} className="mb-2" />
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Bell className="w-6 h-6 text-primary" />

@@ -12,6 +12,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { BookOpen, Clock, Target, Play, CheckCircle, Award, ArrowLeft, Home } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import Breadcrumbs from '@/components/Breadcrumbs';
 
 interface TrainingModule {
   id: string;
@@ -283,6 +284,7 @@ const Training = () => {
       
       <main className="container mx-auto px-4 py-8">
         <div className="mb-8">
+          <Breadcrumbs items={[{ label: 'Dashboard', href: '/dashboard' }, { label: 'Training' }]} className="mb-2" />
           <div className="flex items-center gap-2 mb-4">
             <BookOpen className="w-6 h-6 text-primary" />
             <h1 className="text-3xl font-bold">Training Center</h1>

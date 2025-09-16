@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { useAuth } from '@/contexts/AuthContext';
 import { ClipboardCheck, FileText, ShieldCheck, ArrowLeft, Home } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import Breadcrumbs from '@/components/Breadcrumbs';
 
 const Compliance = () => {
   const { user, loading } = useAuth();
@@ -19,6 +20,7 @@ const Compliance = () => {
       <Header />
       <main className="container mx-auto px-4 py-8">
         <div className="mb-8">
+          <Breadcrumbs items={[{ label: 'Dashboard', href: '/dashboard' }, { label: 'Compliance' }]} className="mb-2" />
           <div className="flex items-center gap-2">
             <ShieldCheck className="w-6 h-6 text-primary" />
             <h1 className="text-3xl font-bold">Compliance</h1>

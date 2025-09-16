@@ -13,6 +13,7 @@ import FarmManagement from "./pages/FarmManagement";
 import NotFound from "./pages/NotFound";
 import Alerts from "./pages/Alerts";
 import Compliance from "./pages/Compliance";
+import RequireRole from "./components/RequireRole";
 
 const queryClient = new QueryClient();
 
@@ -31,7 +32,14 @@ const App = () => (
             <Route path="/training" element={<Training />} />
             <Route path="/farms" element={<FarmManagement />} />
             <Route path="/alerts" element={<Alerts />} />
-            <Route path="/compliance" element={<Compliance />} />
+            <Route
+              path="/compliance"
+              element={
+                <RequireRole role="admin">
+                  <Compliance />
+                </RequireRole>
+              }
+            />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

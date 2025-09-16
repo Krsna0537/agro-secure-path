@@ -12,6 +12,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { Shield, ArrowLeft, ArrowRight, CheckCircle, AlertTriangle, Home } from 'lucide-react';
+import Breadcrumbs from '@/components/Breadcrumbs';
 
 interface AssessmentArea {
   id: string;
@@ -208,6 +209,7 @@ const RiskAssessment = () => {
         <div className="max-w-4xl mx-auto">
           {/* Header */}
           <div className="mb-8">
+            <Breadcrumbs items={[{ label: 'Dashboard', href: '/dashboard' }, { label: 'Risk Assessment' }]} className="mb-2" />
             <div className="flex items-center gap-2 mb-4">
               <Shield className="w-6 h-6 text-primary" />
               <h1 className="text-3xl font-bold">Risk Assessment</h1>

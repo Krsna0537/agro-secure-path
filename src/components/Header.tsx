@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import ProfileMenu from "@/components/ProfileMenu";
 import { Shield, Menu, LogOut } from "lucide-react";
 import { useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
@@ -68,9 +69,7 @@ const Header = () => {
                 </Button>
               </>
             ) : (
-              <Button variant="outline" onClick={signOut}>
-                <LogOut className="h-4 w-4 mr-2" /> Sign out
-              </Button>
+              <ProfileMenu />
             )}
           </div>
 
