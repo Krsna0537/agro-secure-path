@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, Link } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import StatsCard from '@/components/StatsCard';
@@ -10,6 +10,7 @@ import { Progress } from '@/components/ui/progress';
 import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/integrations/supabase/client';
 import { Shield, AlertTriangle, CheckCircle, BookOpen, Activity, MapPin } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 
 interface DashboardData {
   profile: any;
@@ -22,6 +23,7 @@ interface DashboardData {
 
 const Dashboard = () => {
   const { user, loading } = useAuth();
+  const { toast } = useToast();
   const [dashboardData, setDashboardData] = useState<DashboardData | null>(null);
   const [dataLoading, setDataLoading] = useState(true);
 
@@ -36,11 +38,21 @@ const Dashboard = () => {
       setDataLoading(true);
       
       // Fetch user profile
-      const { data: profile } = await supabase
+      const { data: profile, error: profileError } = await supabase
         .from('profiles')
         .select('*')
         .eq('user_id', user?.id)
-        .single();
+        .maybeSingle();
+
+      if (profileError) {
+        console.error('Error fetching profile:', profileError);
+        throw profileError;
+      }
+
+      if (!profile) {
+        console.error('No profile found for user:', user?.id);
+        throw new Error('Profile not found. Please contact support.');
+      }
 
       // Fetch user's farms
       const { data: farms } = await supabase
@@ -104,12 +116,29 @@ const Dashboard = () => {
       });
     } catch (error) {
       console.error('Error fetching dashboard data:', error);
+      // Show error toast to user
+      toast({
+        title: "Error loading dashboard",
+        description: "Please refresh the page or try again later.",
+        variant: "destructive",
+      });
     } finally {
       setDataLoading(false);
     }
   };
 
-  if (loading || dataLoading) {
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <Activity className="w-8 h-8 animate-spin mx-auto mb-4 text-primary" />
+          <p>Signing you in...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (dataLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
@@ -219,7 +248,7 @@ const Dashboard = () => {
                     <MapPin className="w-12 h-12 mx-auto text-muted-foreground mb-3" />
                     <p className="text-muted-foreground">No assessments yet</p>
                     <Button asChild variant="outline" size="sm" className="mt-2">
-                      <a href="/risk-assessment">Start Assessment</a>
+                      <Link to="/risk-assessment">Start Assessment</Link>
                     </Button>
                   </div>
                 )}

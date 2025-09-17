@@ -55,11 +55,21 @@ const FarmManagement = () => {
     try {
       setDataLoading(true);
       
-      const { data: profile } = await supabase
+      const { data: profile, error: profileError } = await supabase
         .from('profiles')
         .select('id')
         .eq('user_id', user?.id)
-        .single();
+        .maybeSingle();
+
+      if (profileError) {
+        console.error('Error fetching profile:', profileError);
+        return;
+      }
+
+      if (!profile) {
+        console.error('No profile found for user');
+        return;
+      }
 
       const { data: farmsData } = await supabase
         .from('farms')
@@ -79,11 +89,16 @@ const FarmManagement = () => {
     e.preventDefault();
     
     try {
-      const { data: profile } = await supabase
+      const { data: profile, error: profileError } = await supabase
         .from('profiles')
         .select('id')
         .eq('user_id', user?.id)
-        .single();
+        .maybeSingle();
+
+      if (profileError || !profile) {
+        console.error('Error fetching profile or profile not found:', profileError);
+        return;
+      }
 
       const farmData = {
         owner_id: profile?.id,

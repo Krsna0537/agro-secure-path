@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate, Link } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -11,7 +11,6 @@ import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { BookOpen, Clock, Target, Play, CheckCircle, Award, ArrowLeft, Home } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
 import Breadcrumbs from '@/components/Breadcrumbs';
 
 interface TrainingModule {
@@ -56,11 +55,21 @@ const Training = () => {
       setDataLoading(true);
       
       // Fetch user profile
-      const { data: profile } = await supabase
+      const { data: profile, error: profileError } = await supabase
         .from('profiles')
         .select('id')
         .eq('user_id', user?.id)
-        .single();
+        .maybeSingle();
+
+      if (profileError) {
+        console.error('Error fetching profile:', profileError);
+        return;
+      }
+
+      if (!profile) {
+        console.error('No profile found for user:', user?.id);
+        return;
+      }
 
       // Fetch all training modules
       const { data: modulesData } = await supabase
@@ -93,11 +102,21 @@ const Training = () => {
 
   const startModule = async (module: TrainingModule) => {
     try {
-      const { data: profile } = await supabase
+      const { data: profile, error: profileError } = await supabase
         .from('profiles')
         .select('id')
         .eq('user_id', user?.id)
-        .single();
+        .maybeSingle();
+
+      if (profileError || !profile) {
+        console.error('Error fetching profile:', profileError);
+        toast({
+          title: "Error starting module",
+          description: "Unable to find user profile. Please try again.",
+          variant: "destructive",
+        });
+        return;
+      }
 
       const { error } = await supabase
         .from('user_training_progress')
@@ -126,11 +145,21 @@ const Training = () => {
 
   const completeModule = async (module: TrainingModule) => {
     try {
-      const { data: profile } = await supabase
+      const { data: profile, error: profileError } = await supabase
         .from('profiles')
         .select('id')
         .eq('user_id', user?.id)
-        .single();
+        .maybeSingle();
+
+      if (profileError || !profile) {
+        console.error('Error fetching profile:', profileError);
+        toast({
+          title: "Error completing module",
+          description: "Unable to find user profile. Please try again.",
+          variant: "destructive",
+        });
+        return;
+      }
 
       const { error } = await supabase
         .from('user_training_progress')
@@ -297,7 +326,7 @@ const Training = () => {
               <ArrowLeft className="w-4 h-4 mr-2" /> Back
             </Button>
             <Button variant="ghost" asChild>
-              <a href="/dashboard"><Home className="w-4 h-4 mr-2" /> Dashboard</a>
+              <Link to="/dashboard"><Home className="w-4 h-4 mr-2" /> Dashboard</Link>
             </Button>
           </div>
         </div>

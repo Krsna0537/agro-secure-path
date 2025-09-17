@@ -35,11 +35,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setSession(session);
         setUser(session?.user ?? null);
         if (session?.user) {
-          const { data } = await supabase
+          const { data, error } = await supabase
             .from('profiles')
             .select('role')
             .eq('user_id', session.user.id)
-            .single();
+            .maybeSingle();
+          
+          if (error) {
+            console.error('Error fetching user role:', error);
+          }
+          
           setRole((data as any)?.role ?? null);
         } else {
           setRole(null);
@@ -53,11 +58,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setSession(session);
       setUser(session?.user ?? null);
       if (session?.user) {
-        const { data } = await supabase
+        const { data, error } = await supabase
           .from('profiles')
           .select('role')
           .eq('user_id', session.user.id)
-          .single();
+          .maybeSingle();
+        
+        if (error) {
+          console.error('Error fetching user role:', error);
+        }
+        
         setRole((data as any)?.role ?? null);
       }
       setLoading(false);

@@ -1,12 +1,11 @@
 import React from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate, Link } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import AlertsManager from '@/components/AlertsManager';
 import { useAuth } from '@/contexts/AuthContext';
 import { Bell, ArrowLeft, Home } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useNavigate } from 'react-router-dom';
 import Breadcrumbs from '@/components/Breadcrumbs';
 
 const Alerts = () => {
@@ -32,7 +31,7 @@ const Alerts = () => {
               <ArrowLeft className="w-4 h-4 mr-2" /> Back
             </Button>
             <Button variant="ghost" asChild>
-              <a href="/dashboard"><Home className="w-4 h-4 mr-2" /> Dashboard</a>
+              <Link to="/dashboard"><Home className="w-4 h-4 mr-2" /> Dashboard</Link>
             </Button>
           </div>
         </div>
